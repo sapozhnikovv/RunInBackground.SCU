@@ -13,9 +13,9 @@ public class BackgroundTaskManager: IBackgroundTaskManager
         _serviceScopeFactory = serviceScopeFactory;
         _logger = logger;
     }
-    public void Run(Func<IServiceProvider, Task> funtor, uint retryCount = 0, uint msRetryOnErrorDelayStep = 100)
+    public void Run(Func<IServiceProvider, Task> functor, uint retryCount = 0, uint msRetryOnErrorDelayStep = 100)
     {
-        if (funtor is null) throw new ArgumentNullException(nameof(funtor));
+        if (functor is null) throw new ArgumentNullException(nameof(functor));
         _ = Task.Run(async () =>
         {
             for (var i = 0; i <= retryCount; i++)
@@ -23,7 +23,7 @@ public class BackgroundTaskManager: IBackgroundTaskManager
                 try
                 {
                     await using var scope = _serviceScopeFactory.CreateAsyncScope();
-                    await funtor(scope.ServiceProvider);
+                    await functor(scope.ServiceProvider);
                     break;
                 }
                 catch (Exception e)
