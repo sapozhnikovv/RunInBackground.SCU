@@ -2,5 +2,5 @@
 
 public interface IBackgroundTaskManager
 {
-    public void Run(Func<IServiceProvider, Task> funtor, uint retryCount = 0, uint msRetryOnErrorDelayStep = 100);
+    public void Run(Func<IServiceProvider, Task> functor, uint retryCount = 0, uint msRetryOnErrorDelayStep = 100);
 }
